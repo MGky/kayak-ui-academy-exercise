@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 <html>
   <head>
     <title>Kayak UI Academy</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
 		${normalizeAssets(assetsByChunkName.main)
       .filter(path => path.endsWith('.css'))

@@ -8,6 +8,10 @@
     grid-column-gap: 5px;
 }
 
+.contentActive {
+    grid-template-columns: 1fr;
+}
+
 .searchBar {
     height: 55px;
     background: rgba(255, 255, 255, 0.2);
@@ -20,6 +24,7 @@
     height: 100%;
     border: none;
     background: rgba(255, 255, 255, 0);
+    padding-right: 5px;
 }
 
 .inputDefault,

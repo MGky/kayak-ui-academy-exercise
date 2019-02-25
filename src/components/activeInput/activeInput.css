@@ -7,6 +7,7 @@
 .inputWrapper {
     height: 60px;
     background: #FFF;
+    width: 100%;
     display: grid;
     grid-template-columns: 60px 1fr;
 }
@@ -32,6 +33,7 @@
     border: none;
     font-size: 16px;
     font-weight: bold;
+    padding-right: 5px;
 }
 
 .inputActive:focus {

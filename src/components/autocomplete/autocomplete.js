@@ -66,7 +66,7 @@ class Autocomplete extends Component {
   render() {
     const { search, active, movies, error } = this.state;
     return (
-      <div className={styles.content}>
+      <div className={active ? `${styles.content} ${styles.contentActive}` : styles.content}>
         <div className={styles.searchBar}>
           <Icon SvgIcon={VideoPlayerIcon} iconClass={styles.whitePlayerIcon} />
           {!active ? (
