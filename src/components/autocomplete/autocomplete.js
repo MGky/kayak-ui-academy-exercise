@@ -26,7 +26,7 @@ class Autocomplete extends Component {
         `${search}&page=1&include_adult=false`
     )
       .then(res => res.json())
-      .then(({ results }) => this.addMovies(results));
+      .then(({ results }) => results && this.addMovies(results));
   };
 
   addMovies = movies => {
