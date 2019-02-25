@@ -2,6 +2,9 @@ import { hot } from 'react-hot-loader/root';
 import React, { Component } from 'react';
 import VideoPlayerIcon from '../../img/video-player.svg';
 import SearchIcon from '../../img/search.svg';
+import DefaultInput from '../defaultInput';
+import ActiveInput from '../activeInput';
+import Icon from '../icon';
 import styles from './autocomplete.css';
 
 class Autocomplete extends Component {
@@ -23,12 +26,12 @@ class Autocomplete extends Component {
         `${search}&page=1&include_adult=false`
     )
       .then(res => res.json())
-      .then(res => this.addMovies(res.results));
+      .then(({ results }) => this.addMovies(results));
   };
 
   addMovies = movies => {
     this.setState({
-      movies: movies.slice(0, 8),
+      movies: movies.length > 8 ? movies.slice(0, 8) : movies,
       error: movies.length === 0 ? 'No results found' : ''
     });
   };
@@ -54,57 +57,37 @@ class Autocomplete extends Component {
     });
   };
 
-  renderMovie = ({ id, title, vote_average, release_date }) => {
-    return (
-      <div className={styles.card} key={id} onClick={() => this.setMovie(title)}>
-        <div className={styles.mainText}>{title}</div>
-        <div className={styles.altText}>
-          {`${vote_average % 1 !== 0 ? vote_average : `${vote_average}.0`} Rating, `}
-          {release_date.slice(0, 4)}
-        </div>
-      </div>
-    );
+  closeActive = () => {
+    this.setState({
+      active: false
+    });
   };
 
   render() {
     const { search, active, movies, error } = this.state;
     return (
-      <div className={styles.container}>
-        <div className={active ? styles.content : `${styles.content} ${styles.contentActive}`}>
-          <div className={styles.searchBar}>
-            <div className={styles.iconWrapper}>
-              <VideoPlayerIcon className={`${styles.icon} ${styles.whitePlayerIcon}`} />
-            </div>
-            <div>
-              <div className={active ? styles.inputWrapper : ''}>
-                {active && (
-                  <div className={`${styles.iconWrapper} ${styles.darkPlayerIconWrapper}`}>
-                    <VideoPlayerIcon className={`${styles.icon} ${styles.darkPlayerIcon}`} />
-                  </div>
-                )}
-                <input
-                  autoComplete="off"
-                  value={search}
-                  onChange={this.handleChange}
-                  className={!active ? styles.inputDefault : styles.inputActive}
-                  placeholder="Enter movie name"
-                />
-                {active && <div className={styles.altText}>Enter a movie name</div>}
-              </div>
-              {active && (
-                <div className={styles.movieList}>
-                  {error && <div className={`${styles.card} ${styles.mainText}`}>{error}</div>}
-                  {movies.map(this.renderMovie)}
-                </div>
-              )}
-            </div>
-          </div>
-          {!active && (
-            <div className={`${styles.iconWrapper} ${styles.searchIconWrapper}`}>
-              <SearchIcon className={`${styles.icon} ${styles.searchIcon}`} />
-            </div>
+      <div className={styles.content}>
+        <div className={styles.searchBar}>
+          <Icon SvgIcon={VideoPlayerIcon} iconClass={styles.whitePlayerIcon} />
+          {!active ? (
+            <DefaultInput
+              showPlaceholder
+              inputClassName={styles.inputDefault}
+              onInputChange={this.handleChange}
+              search={search}
+            />
+          ) : (
+            <ActiveInput
+              onClose={this.closeActive}
+              onSet={this.setMovie}
+              movies={movies}
+              error={error}
+              onInputChange={this.handleChange}
+              search={search}
+            />
           )}
         </div>
+        {!active && <Icon SvgIcon={SearchIcon} iconClass={styles.searchIcon} />}
       </div>
     );
   }

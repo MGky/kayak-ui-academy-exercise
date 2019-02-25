@@ -1,0 +1,59 @@
+.inputWrapper,
+.movieList {
+    top: -5px;
+    position: relative;
+}
+
+.inputWrapper {
+    height: 60px;
+    background: #FFF;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+}
+
+.movieList {
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.darkPlayerIcon {
+    height: 100%;
+    grid-row: 1 / 3;
+}
+
+.darkPlayerIcon > * {
+    width: 25px;
+    height: 25px;
+}
+
+.inputActive {
+    width: 100%;
+    margin-top: 10px;
+    height: 25px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.inputActive:focus {
+    outline: none;
+}
+
+.inputText {
+    color: gray;
+    font-size: 12px;
+}
+
+.error {
+    background-color: #FFF;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    padding: 0 60px;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 576px) {
+    .inputActive {
+        font-size: 13px;
+    }
+}

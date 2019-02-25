@@ -1,0 +1,31 @@
+.card {
+    min-height: 70px;
+    width: 100%;
+    background-color: #FFF;
+    padding: 15px 60px;
+    cursor: pointer;
+}
+
+.card:hover {
+    background-color: lightgray;
+}
+
+.altText {
+    color: #73757a;
+    font-size: 12px;
+}
+
+.mainText {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 576px) {
+    .mainText {
+        font-size: 13px;
+    }
+
+    .altText {
+        font-size: 11px;
+    }
+}
